@@ -1,5 +1,4 @@
 version: '3.4'
-
 services:
   db:
     image: mysql:5.7.22
@@ -12,6 +11,8 @@ services:
       MYSQL_DATABASE: wordpress
     ports:
       - "3308:3306"
+    networks:
+      - wordpress-network
   wordpress:
     image: wordpress:latest
     ports:
@@ -27,3 +28,8 @@ services:
       WORDPRESS_DB_PASSWORD: docker
     depends_on:
       - db
+    networks:
+      - wordpress-network
+networks:
+    wordpress-network:
+      driver: bridge
