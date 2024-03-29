@@ -17,7 +17,7 @@ jobs:
          password: ${{ secrets.DOCKER_PASSWORD }}
 
      - name: Docker Compose Build
-       working-directory: ./ASP.NET-8
+       working-directory: ./02-AfterDockerization
        run: docker compose build
 
      - name: Push to Docker Hub Container Registry
@@ -28,8 +28,8 @@ jobs:
          docker push ${{ secrets.DOCKER_USERNAME }}/docker-from-zero-to-mastery-dotnet-8:latest
          docker push ${{ secrets.DOCKER_USERNAME }}/docker-from-zero-to-mastery-dotnet-8:${{ github.run_id }}
          
-         docker tag mysql:8.0.29 ${{ secrets.DOCKER_USERNAME }}/mysql:8.0.29
-         docker tag mysql:8.0.29 ${{ secrets.DOCKER_USERNAME }}/mysql:${{ github.run_id }}
+         docker tag docker-from-zero-to-mastery-dotnet-8-db:latest ${{ secrets.DOCKER_USERNAME }}/docker-from-zero-to-mastery-dotnet-8-db:latest
+         docker tag docker-from-zero-to-mastery-dotnet-8-db:latest ${{ secrets.DOCKER_USERNAME }}/docker-from-zero-to-mastery-dotnet-8-db:${{ github.run_id }}
          
-         docker push ${{ secrets.DOCKER_USERNAME }}/mysql:8.0.29
-         docker push ${{ secrets.DOCKER_USERNAME }}/mysql:${{ github.run_id }}
+         docker push ${{ secrets.DOCKER_USERNAME }}/docker-from-zero-to-mastery-dotnet-8-db:latest
+         docker push ${{ secrets.DOCKER_USERNAME }}/docker-from-zero-to-mastery-dotnet-8-db:${{ github.run_id }}
